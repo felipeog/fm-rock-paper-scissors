@@ -169,8 +169,6 @@ body {
 }
 
 .open-rules {
-  margin: 6rem 2rem 0 0;
-  align-self: flex-end;
   padding: 0.2rem 2rem;
   background: transparent;
   border: 0.1rem solid #fff;
@@ -187,7 +185,6 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.6);
   z-index: 20;
   justify-content: center;
   align-items: center;
@@ -266,6 +263,15 @@ body {
   .picked__title {
     margin-bottom: 2rem;
   }
+
+  .open-rules {
+    margin: 6rem 2rem 0 0;
+    align-self: flex-end;
+  }
+
+  .rules-modal {
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
 
 @media screen and (max-width: 799px) {
@@ -336,5 +342,21 @@ body {
 
   .result {
     grid-area: result;
+  }
+
+  .open-rules {
+    margin-top: 2rem;
+  }
+
+  .rules-modal {
+    background: #fff;
+  }
+
+  .rules {
+    max-width: 280px;
+  }
+
+  .rules__image {
+    width: 100%;
   }
 }
