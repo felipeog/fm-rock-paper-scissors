@@ -29,12 +29,10 @@ const handPaper = document.querySelector('.section--1 .hand--paper')
 const handScissors = document.querySelector('.section--1 .hand--scissors')
 
 // section 2 elements to show selected hands
-const pickedHandPlayer = document.querySelector(
-  '.section--2 .picked--player .hand'
-)
-const pickedHandHouse = document.querySelector(
-  '.section--2 .picked--house .hand'
-)
+const playerPick = document.querySelector('.section--2 .picked--player .hand')
+const playerPickImage = playerPick.querySelector('.hand__image')
+const housePick = document.querySelector('.section--2 .picked--house .hand')
+const housePickImage = housePick.querySelector('.hand__image')
 
 // sections elements to hide or show
 const section1 = document.querySelector('.section--1')
@@ -97,48 +95,47 @@ const getResult = () => {
   return { winner: null, resultText: 'Draw' }
 }
 
+// resets everything
 const goToStep1 = () => {
   toggleFinalResult()
   toggleSections()
 }
 
+// shows player's move
+// hides house's move
 const goToStep2 = (e) => {
-  const playerHandKey = e.currentTarget.dataset.hand
+  const playerPickKey = e.currentTarget.dataset.hand
 
-  playerHand = hands[playerHandKey]
+  playerHand = hands[playerPickKey]
   houseHand = getRandomHand()
 
-  pickedHandPlayer.className = `hand hand--result hand--${playerHand.value}`
-  pickedHandHouse.className = 'hand hand--result hand--empty'
+  playerPick.className = `hand hand--result hand--${playerHand.value}`
+  playerPickImage.src = playerHand.image
 
-  pickedHandPlayer.querySelector('.hand__image').src = playerHand.image
-  pickedHandHouse.querySelector('.hand__image').src = ''
-
-  result.textContent = '---'
+  housePick.className = 'hand hand--result hand--empty'
+  housePickImage.src = ''
 
   toggleSections()
   goToStep3()
 }
 
+// shows houses's move
 const goToStep3 = () => {
   setTimeout(() => {
-    pickedHandHouse.className = `hand hand--result hand--${houseHand.value}`
-    pickedHandHouse.querySelector('.hand__image').src = houseHand.image
+    housePick.className = `hand hand--result hand--${houseHand.value}`
+    housePickImage.src = houseHand.image
 
     goToStep4()
   }, 1000)
 }
 
+// shows final result
 const goToStep4 = () => {
   const { winner, resultText } = getResult()
 
   setTimeout(() => {
-    pickedHandPlayer.className = `hand hand--result hand--${playerHand.value} ${
-      winner === 'player' ? 'hand--winner' : ''
-    }`
-    pickedHandHouse.className = `hand hand--result hand--${houseHand.value} ${
-      winner === 'house' ? 'hand--winner' : ''
-    }`
+    winner === 'player' && playerPick.classList.add('hand--winner')
+    winner === 'house' && housePick.classList.add('hand--winner')
 
     result.textContent = resultText
     scoreNumber.textContent = totalScore
@@ -147,6 +144,8 @@ const goToStep4 = () => {
   }, 1000)
 }
 
+// add event listeners to the hands
+// check if there is a score stored in the local storage
 const init = () => {
   const handElements = [handRock, handPaper, handScissors]
   handElements.forEach((hand) => hand.addEventListener('click', goToStep2))
