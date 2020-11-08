@@ -84,6 +84,7 @@ const getResult = (playerHand, houseHand) => {
 
 const goToStep1 = () => {
   toggleSections()
+  step2.style.gridTemplateColumns = '1fr 0 1fr'
   resultWrapper.classList.toggle('result--active')
 }
 
@@ -93,8 +94,8 @@ const goToStep2 = (e) => {
   playerHand = hands[playerHandKey]
   houseHand = getRandomHand()
 
-  pickedHandPlayer.className = `hand hand--${playerHand.value}`
-  pickedHandHouse.className = 'hand hand--empty'
+  pickedHandPlayer.className = `hand hand--result hand--${playerHand.value}`
+  pickedHandHouse.className = 'hand hand--result hand--empty'
 
   pickedHandPlayer.querySelector('.hand__image').src = playerHand.image
   pickedHandHouse.querySelector('.hand__image').src = ''
@@ -107,7 +108,7 @@ const goToStep2 = (e) => {
 
 const goToStep3 = () => {
   setTimeout(() => {
-    pickedHandHouse.className = `hand hand--${houseHand.value}`
+    pickedHandHouse.className = `hand hand--result hand--${houseHand.value}`
     pickedHandHouse.querySelector('.hand__image').src = houseHand.image
 
     goToStep4()
@@ -118,15 +119,16 @@ const goToStep4 = () => {
   const { winner, resultText } = getResult(playerHand, houseHand)
 
   setTimeout(() => {
-    pickedHandPlayer.className = `hand hand--${playerHand.value} ${
+    pickedHandPlayer.className = `hand hand--result hand--${playerHand.value} ${
       winner === 'player' ? 'hand--winner' : ''
     }`
-    pickedHandHouse.className = `hand hand--${houseHand.value} ${
+    pickedHandHouse.className = `hand hand--result hand--${houseHand.value} ${
       winner === 'house' ? 'hand--winner' : ''
     }`
 
     result.textContent = resultText
     scoreNumber.textContent = totalScore
+    step2.style.gridTemplateColumns = 'repeat(3, 1fr)'
     resultWrapper.classList.toggle('result--active')
   }, 1000)
 }

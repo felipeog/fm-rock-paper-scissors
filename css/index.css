@@ -82,8 +82,8 @@ body {
 
 .step--2 {
   display: grid;
-  grid-template-columns: 1fr minmax(190px, 1fr) 1fr;
-  grid-gap: 2rem;
+  grid-template-columns: 1fr 0 1fr;
+  grid-gap: 4rem;
 }
 
 .step--1,
@@ -130,6 +130,16 @@ body {
 .hand--empty {
   background: rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1);
+}
+
+.hand--result {
+  cursor: default;
+  width: 12rem;
+  height: 12rem;
+}
+
+.hand--result .hand__image {
+  width: 6rem;
 }
 
 .picked {
