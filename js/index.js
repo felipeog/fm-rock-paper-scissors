@@ -114,7 +114,7 @@ const goToStep2 = (e) => {
   pickedHandPlayer.querySelector('.hand__image').src = playerHand.image
   pickedHandHouse.querySelector('.hand__image').src = ''
 
-  result.textContent = ''
+  result.textContent = '---'
 
   toggleSections()
   goToStep3()
