@@ -85,9 +85,10 @@ const getResult = () => {
 }
 
 const goToStep1 = () => {
-  toggleSections()
   section2.style.gridTemplateColumns = '1fr 0 1fr'
   resultWrapper.classList.toggle('result--active')
+
+  toggleSections()
 }
 
 const goToStep2 = (e) => {
@@ -128,10 +129,11 @@ const goToStep4 = () => {
       winner === 'house' ? 'hand--winner' : ''
     }`
 
-    result.textContent = resultText
-    scoreNumber.textContent = totalScore
-    section2.style.gridTemplateColumns = 'repeat(3, 1fr)'
     resultWrapper.classList.toggle('result--active')
+    result.textContent = resultText
+
+    section2.style.gridTemplateColumns = 'repeat(3, 1fr)'
+    scoreNumber.textContent = totalScore
   }, 1000)
 }
 
