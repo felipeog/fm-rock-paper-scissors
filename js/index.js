@@ -85,7 +85,8 @@ const getResult = () => {
 }
 
 const goToStep1 = () => {
-  section2.style.gridTemplateColumns = '1fr 0 1fr'
+  section2.style.gridTemplateColumns =
+    window.innerWidth >= 800 ? '1fr 0 1fr' : ''
   resultWrapper.classList.toggle('result--active')
 
   toggleSections()
@@ -132,7 +133,10 @@ const goToStep4 = () => {
     resultWrapper.classList.toggle('result--active')
     result.textContent = resultText
 
-    section2.style.gridTemplateColumns = 'repeat(3, 1fr)'
+    console.log(window.innerWidth)
+
+    section2.style.gridTemplateColumns =
+      window.innerWidth >= 800 ? 'repeat(3, 1fr)' : ''
     scoreNumber.textContent = totalScore
   }, 1000)
 }
