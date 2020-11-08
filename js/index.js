@@ -29,7 +29,9 @@ const handPaper = document.querySelector('.step--1 .hand--paper')
 const handScissors = document.querySelector('.step--1 .hand--scissors')
 
 // step 2 elements to show selected hands
-const pickedHandPlayer = document.querySelector('.step--2 .picked--you .hand')
+const pickedHandPlayer = document.querySelector(
+  '.step--2 .picked--player .hand'
+)
 const pickedHandHouse = document.querySelector('.step--2 .picked--house .hand')
 
 // steps elements to hide or show
@@ -45,7 +47,7 @@ const playAgain = document.querySelector('.result__play-again')
 /**
  * state
  */
-let totalScore
+let totalScore, playerHand, houseHand
 
 /**
  * functions
@@ -87,11 +89,9 @@ const goToStep1 = () => {
 
 const goToStep2 = (e) => {
   const playerHandKey = e.currentTarget.dataset.hand
-  const playerHand = hands[playerHandKey]
-  const houseHand = getRandomHand()
-  const { winner, resultText } = getResult(playerHand, houseHand)
 
-  toggleSections()
+  playerHand = hands[playerHandKey]
+  houseHand = getRandomHand()
 
   pickedHandPlayer.className = `hand hand--${playerHand.value}`
   pickedHandHouse.className = 'hand hand--empty'
@@ -101,23 +101,34 @@ const goToStep2 = (e) => {
 
   result.textContent = ''
 
+  toggleSections()
+  goToStep3()
+}
+
+const goToStep3 = () => {
   setTimeout(() => {
     pickedHandHouse.className = `hand hand--${houseHand.value}`
     pickedHandHouse.querySelector('.hand__image').src = houseHand.image
 
-    setTimeout(() => {
-      pickedHandPlayer.className = `hand hand--${playerHand.value} ${
-        winner === 'player' ? 'hand--winner' : ''
-      }`
-      pickedHandHouse.className = `hand hand--${houseHand.value} ${
-        winner === 'house' ? 'hand--winner' : ''
-      }`
+    goToStep4()
+  }, 1000)
+}
 
-      result.textContent = resultText
-      scoreNumber.textContent = totalScore
-      resultWrapper.classList.toggle('result--active')
-    }, 2000)
-  }, 2000)
+const goToStep4 = () => {
+  const { winner, resultText } = getResult(playerHand, houseHand)
+
+  setTimeout(() => {
+    pickedHandPlayer.className = `hand hand--${playerHand.value} ${
+      winner === 'player' ? 'hand--winner' : ''
+    }`
+    pickedHandHouse.className = `hand hand--${houseHand.value} ${
+      winner === 'house' ? 'hand--winner' : ''
+    }`
+
+    result.textContent = resultText
+    scoreNumber.textContent = totalScore
+    resultWrapper.classList.toggle('result--active')
+  }, 1000)
 }
 
 /**
