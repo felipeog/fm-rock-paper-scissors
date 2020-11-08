@@ -46,6 +46,11 @@ const result = document.querySelector('.result__title')
 const scoreNumber = document.querySelector('.score__number')
 const playAgain = document.querySelector('.result__play-again')
 
+// modal elements
+const rulesModal = document.querySelector('.rules-modal')
+const openRules = document.querySelector('.open-rules')
+const closeRules = document.querySelector('.rules__close')
+
 /**
  * state
  */
@@ -70,6 +75,10 @@ const toggleSections = () => {
 
 const toggleFinalResult = () => {
   resultWrapper.classList.toggle('result--active')
+}
+
+const toggleRulesModal = () => {
+  rulesModal.classList.toggle('rules-modal--active')
 }
 
 const getResult = () => {
@@ -138,15 +147,18 @@ const goToStep4 = () => {
   }, 1000)
 }
 
-/**
- * events
- */
-window.addEventListener('load', () => {
+const init = () => {
   const handElements = [handRock, handPaper, handScissors]
   handElements.forEach((hand) => hand.addEventListener('click', goToStep2))
 
   totalScore = Number(localStorage.getItem(lsKey)) || 0
   scoreNumber.textContent = totalScore
-})
+}
 
+/**
+ * events
+ */
+window.addEventListener('load', init)
 playAgain.addEventListener('click', goToStep1)
+openRules.addEventListener('click', toggleRulesModal)
+closeRules.addEventListener('click', toggleRulesModal)
