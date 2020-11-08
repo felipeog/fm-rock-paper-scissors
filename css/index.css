@@ -217,6 +217,7 @@ body {
   cursor: pointer;
 }
 
+/* desktop */
 @media screen and (min-width: 800px) {
   .score {
     width: 768px;
@@ -274,6 +275,7 @@ body {
   }
 }
 
+/* mobile */
 @media screen and (max-width: 799px) {
   .score {
     width: 280px;
