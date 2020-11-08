@@ -55,7 +55,7 @@ let totalScore, playerHand, houseHand
  * functions
  */
 const getRandomHand = () => {
-  const handKeys = ['rock', 'paper', 'scissors']
+  const handKeys = Object.keys(hands)
   const randomIndex = Math.floor(Math.random() * handKeys.length)
   const randomKey = handKeys[randomIndex]
 
@@ -66,6 +66,10 @@ const toggleSections = () => {
   const sections = [section1, section2]
 
   sections.forEach((section) => section.classList.toggle('section--active'))
+}
+
+const toggleFinalResult = () => {
+  resultWrapper.classList.toggle('result--active')
 }
 
 const getResult = () => {
@@ -85,10 +89,7 @@ const getResult = () => {
 }
 
 const goToStep1 = () => {
-  section2.style.gridTemplateColumns =
-    window.innerWidth >= 800 ? '1fr 0 1fr' : ''
-  resultWrapper.classList.toggle('result--active')
-
+  toggleFinalResult()
   toggleSections()
 }
 
@@ -120,7 +121,7 @@ const goToStep3 = () => {
 }
 
 const goToStep4 = () => {
-  const { winner, resultText } = getResult(playerHand, houseHand)
+  const { winner, resultText } = getResult()
 
   setTimeout(() => {
     pickedHandPlayer.className = `hand hand--result hand--${playerHand.value} ${
@@ -130,14 +131,10 @@ const goToStep4 = () => {
       winner === 'house' ? 'hand--winner' : ''
     }`
 
-    resultWrapper.classList.toggle('result--active')
     result.textContent = resultText
-
-    console.log(window.innerWidth)
-
-    section2.style.gridTemplateColumns =
-      window.innerWidth >= 800 ? 'repeat(3, 1fr)' : ''
     scoreNumber.textContent = totalScore
+
+    toggleFinalResult()
   }, 1000)
 }
 
