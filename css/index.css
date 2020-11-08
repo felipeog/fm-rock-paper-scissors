@@ -66,11 +66,11 @@ body {
   line-height: 1;
 }
 
-.step {
+.section {
   min-height: 320px;
 }
 
-.step--1 {
+.section--1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 4rem;
@@ -80,18 +80,18 @@ body {
   background-position: center;
 }
 
-.step--2 {
+.section--2 {
   display: grid;
   grid-template-columns: 1fr 0 1fr;
   grid-gap: 4rem;
 }
 
-.step--1,
-.step--2 {
+.section--1,
+.section--2 {
   display: none;
 }
 
-.step--active {
+.section--active {
   display: grid;
 }
 

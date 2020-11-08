@@ -23,20 +23,22 @@ const hands = {
   },
 }
 
-// step 1 elements for click events
-const handRock = document.querySelector('.step--1 .hand--rock')
-const handPaper = document.querySelector('.step--1 .hand--paper')
-const handScissors = document.querySelector('.step--1 .hand--scissors')
+// section 1 elements for click events
+const handRock = document.querySelector('.section--1 .hand--rock')
+const handPaper = document.querySelector('.section--1 .hand--paper')
+const handScissors = document.querySelector('.section--1 .hand--scissors')
 
-// step 2 elements to show selected hands
+// section 2 elements to show selected hands
 const pickedHandPlayer = document.querySelector(
-  '.step--2 .picked--player .hand'
+  '.section--2 .picked--player .hand'
 )
-const pickedHandHouse = document.querySelector('.step--2 .picked--house .hand')
+const pickedHandHouse = document.querySelector(
+  '.section--2 .picked--house .hand'
+)
 
-// steps elements to hide or show
-const step1 = document.querySelector('.step--1')
-const step2 = document.querySelector('.step--2')
+// sections elements to hide or show
+const section1 = document.querySelector('.section--1')
+const section2 = document.querySelector('.section--2')
 
 // result elements
 const resultWrapper = document.querySelector('.result')
@@ -61,12 +63,12 @@ const getRandomHand = () => {
 }
 
 const toggleSections = () => {
-  const sections = [step1, step2]
+  const sections = [section1, section2]
 
-  sections.forEach((section) => section.classList.toggle('step--active'))
+  sections.forEach((section) => section.classList.toggle('section--active'))
 }
 
-const getResult = (playerHand, houseHand) => {
+const getResult = () => {
   if (playerHand.beats === houseHand.value) {
     totalScore = totalScore + 1
     localStorage.setItem(lsKey, totalScore)
@@ -84,7 +86,7 @@ const getResult = (playerHand, houseHand) => {
 
 const goToStep1 = () => {
   toggleSections()
-  step2.style.gridTemplateColumns = '1fr 0 1fr'
+  section2.style.gridTemplateColumns = '1fr 0 1fr'
   resultWrapper.classList.toggle('result--active')
 }
 
@@ -128,7 +130,7 @@ const goToStep4 = () => {
 
     result.textContent = resultText
     scoreNumber.textContent = totalScore
-    step2.style.gridTemplateColumns = 'repeat(3, 1fr)'
+    section2.style.gridTemplateColumns = 'repeat(3, 1fr)'
     resultWrapper.classList.toggle('result--active')
   }, 1000)
 }
