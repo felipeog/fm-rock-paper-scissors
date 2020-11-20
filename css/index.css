@@ -28,6 +28,10 @@ body {
   );
 }
 
+.hidden {
+  display: none;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
