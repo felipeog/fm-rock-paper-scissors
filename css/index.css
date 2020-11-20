@@ -193,6 +193,8 @@ body {
 
 .rules-modal--active {
   display: flex;
+  animation-name: modal-enter;
+  animation-duration: 200ms;
 }
 
 .rules {
@@ -216,6 +218,16 @@ body {
 
 .rules__close {
   cursor: pointer;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* desktop */

@@ -45,7 +45,8 @@ const scoreNumber = document.querySelector('.score__number')
 const playAgain = document.querySelector('.result__play-again')
 
 // modal elements
-const rulesModal = document.querySelector('.rules-modal')
+const modalWrapper = document.querySelector('.rules-modal')
+const modalContent = document.querySelector('.rules')
 const openRules = document.querySelector('.open-rules')
 const closeRules = document.querySelector('.rules__close')
 
@@ -76,7 +77,7 @@ const toggleFinalResult = () => {
 }
 
 const toggleRulesModal = () => {
-  rulesModal.classList.toggle('rules-modal--active')
+  modalWrapper.classList.toggle('rules-modal--active')
 }
 
 const getResult = () => {
@@ -159,5 +160,9 @@ const init = () => {
  */
 window.addEventListener('load', init)
 playAgain.addEventListener('click', goToStep1)
-openRules.addEventListener('click', toggleRulesModal)
-closeRules.addEventListener('click', toggleRulesModal)
+modalContent.addEventListener('click', (e) => e.stopPropagation())
+
+const modalElements = [openRules, closeRules, modalWrapper]
+modalElements.forEach((element) => {
+  element.addEventListener('click', toggleRulesModal)
+})
